@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+module github.com/bexiiiii/smart_food_store.git
+
+go 1.25
+=======
+module github.com/Behruz/Smart-food-store
+
+go 1.25.5
+>>>>>>> origin/main
