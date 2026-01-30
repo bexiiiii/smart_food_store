@@ -1,3 +1,3 @@
-module github.com/Behruz/Smart-food-store
+module github.com/bexiiiii/smart_food_store.git
 
-go 1.25.5
+go 1.25
