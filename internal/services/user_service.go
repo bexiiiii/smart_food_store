@@ -1,6 +1,6 @@
 package services
 
-import "github.com/KausarTukezhan/Smart-food-store/internal/models"
+import "github.com/bexiiiii/smart_food_store/internal/models"
 
 type UserService struct{}
 
