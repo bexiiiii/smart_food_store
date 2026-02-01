@@ -1,6 +1,6 @@
 package services
 
-import "github.com/bexiiiii/smart_food_store/internal/models"
+import "github.com/bexiiiii/smart_food_store.git/internal/models"
 
 type CartService struct{}
 
