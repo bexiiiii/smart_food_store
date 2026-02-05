@@ -1,14 +1,14 @@
 package repository
 
+import (
+	"sync"
 import "github.com/bexiiiii/smart_food_store.git/internal/models"
 
-type UserRepository struct{}
+	"github.com/bexiiiii/smart_food_store/internal/models"
+)
 
-func (r *UserRepository) Create(user models.User) error {
-
-	return nil
-}
-
-func (r *UserRepository) GetByID(id int) (*models.User, error) {
-	return &models.User{}, nil
+type UserRepository struct {
+	mu     sync.Mutex
+	users  []models.User
+	nextID int
 }
