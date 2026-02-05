@@ -1,9 +1,19 @@
 package repository
 
-import "github.com/bexiiiii/smart_food_store.git/internal/models"
+import (
+	"github.com/bexiiiii/smart_food_store.git/internal/models"
+	"sync"
+)
 
-type ProductRepository struct{}
+type ProductRepository struct {
+	Mu       sync.RWMutex
+	Products []models.Product
+}
 
-func (r *ProductRepository) GetByID(id int) (*models.Product, error) {
-	return &models.Product{}, nil
+var ProductRepo = &ProductRepository{
+	Products: []models.Product{
+		{ID: 101, Name: "Pasta", Price: 500},
+		{ID: 102, Name: "Tomato Sauce", Price: 300},
+		{ID: 103, Name: "Cheese", Price: 850},
+	},
 }

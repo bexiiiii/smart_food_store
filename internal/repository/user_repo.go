@@ -1,14 +1,21 @@
 package repository
 
-import "github.com/bexiiiii/smart_food_store.git/internal/models"
+import (
+	"github.com/bexiiiii/smart_food_store.git/internal/models"
+	"sync"
+)
 
-type UserRepository struct{}
-
-func (r *UserRepository) Create(user models.User) error {
-
-	return nil
+type UserRepository struct {
+	Mu    sync.RWMutex
+	Users map[int]models.User
 }
 
-func (r *UserRepository) GetByID(id int) (*models.User, error) {
-	return &models.User{}, nil
+var UserRepo = &UserRepository{
+	Users: make(map[int]models.User),
+}
+
+func (r *UserRepository) CreateUser(u models.User) {
+	r.Mu.Lock()
+	defer r.Mu.Unlock()
+	r.Users[u.ID] = u
 }
