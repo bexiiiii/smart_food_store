@@ -1,6 +1,6 @@
 package services
 
-import "github.com/bexiiiii/smart_food_store.git/internal/models"
+import "github.com/bexiiiii/smart_food_store/internal/models"
 
 type CartService struct {
 	carts  []models.Cart
@@ -16,6 +16,4 @@ func (s *CartService) Create(cart models.Cart) models.Cart {
 
 func (s *CartService) GetAll() []models.Cart {
 	return s.carts
-func (s *CartService) AddItems(cart *models.Cart, items map[int]float64) {
-
 }
