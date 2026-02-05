@@ -1,8 +1,22 @@
 package services
 
-type RecipeService struct{}
+import (
+	"github.com/bexiiiii/smart_food_store/internal/models"
+	"github.com/bexiiiii/smart_food_store/internal/repository"
+)
 
-func (s *RecipeService) CalculateIngredients(recipeID int, portions int) map[int]float64 {
+type RecipeService struct {
+	repo *repository.RecipeRepository
+}
 
-	return map[int]float64{}
+func NewRecipeService(repo *repository.RecipeRepository) *RecipeService {
+	return &RecipeService{repo: repo}
+}
+
+func (s *RecipeService) Create(recipe models.Recipe) models.Recipe {
+	return s.repo.Create(recipe)
+}
+
+func (s *RecipeService) GetAll() []models.Recipe {
+	return s.repo.GetAll()
 }

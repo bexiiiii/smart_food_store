@@ -1,9 +1,13 @@
 package repository
 
-import "github.com/bexiiiii/smart_food_store/internal/models"
+import (
+	"sync"
 
-type ProductRepository struct{}
+	"github.com/bexiiiii/smart_food_store/internal/models"
+)
 
-func (r *ProductRepository) GetByID(id int) (*models.Product, error) {
-	return &models.Product{}, nil
+type ProductRepository struct {
+	mu       sync.Mutex
+	products []models.Product
+	nextID   int
 }
