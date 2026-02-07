@@ -1,14 +1,54 @@
 package repository
 
-import "github.com/bexiiiii/smart_food_store.git/internal/models"
+import (
+	"github.com/bexiiiii/smart_food_store/internal/models"
+	"gorm.io/gorm"
+)
 
-type UserRepository struct{}
-
-func (r *UserRepository) Create(user models.User) error {
-
-	return nil
+type UserRepository struct {
+	db *gorm.DB
 }
 
-func (r *UserRepository) GetByID(id int) (*models.User, error) {
-	return &models.User{}, nil
+func NewUserRepository(db *gorm.DB) *UserRepository {
+	return &UserRepository{db: db}
+}
+
+func (r *UserRepository) Create(user *models.User) error {
+	return r.db.Create(user).Error
+}
+
+func (r *UserRepository) GetByID(id uint) (*models.User, error) {
+	var user models.User
+	err := r.db.First(&user, id).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (r *UserRepository) GetByEmail(email string) (*models.User, error) {
+	var user models.User
+	err := r.db.Where("email = ?", email).First(&user).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (r *UserRepository) GetAll() ([]models.User, error) {
+	var users []models.User
+	err := r.db.Find(&users).Error
+	return users, err
+}
+
+func (r *UserRepository) Update(user *models.User) error {
+	return r.db.Save(user).Error
+}
+
+func (r *UserRepository) Delete(id uint) error {
+	return r.db.Delete(&models.User{}, id).Error
+}
+
+func (r *UserRepository) UpdateRole(id uint, role models.Role) error {
+	return r.db.Model(&models.User{}).Where("id = ?", id).Update("role", role).Error
 }
